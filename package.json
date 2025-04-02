@@ -1,0 +1,11 @@
+{
+  "name": "studio.mongoosejs.io",
+  "dependencies": {
+    "tailwindcss": "3.x"
+  },
+  "scripts": {
+    "postinstall": "npm run tailwind",
+    "tailwind": "tailwindcss -o ./public/tw.css",
+    "tailwind:watch": "tailwindcss -o ./public/tw.css --watch"
+  }
+}
