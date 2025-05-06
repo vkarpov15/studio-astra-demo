@@ -3,8 +3,12 @@
   "dependencies": {
     "tailwindcss": "3.x"
   },
+  "devDependencies": {
+    "serve": "14.2.4"
+  },
   "scripts": {
     "postinstall": "npm run tailwind",
+    "start": "serve ./public",
     "tailwind": "tailwindcss -o ./public/tw.css",
     "tailwind:watch": "tailwindcss -o ./public/tw.css --watch"
   }
