@@ -8,7 +8,7 @@ const opts = {
 console.log('Creating Mongoose studio', opts);
 require('@mongoosejs/studio/frontend')(`/.netlify/functions/studio`, true, opts).then(() => {
   execSync(`
-  mkdir -p ./public/studio
-  cp -r ./node_modules/@mongoosejs/studio/frontend/public/* ./public/studio/
+  mkdir -p ./public/imdb
+  cp -r ./node_modules/@mongoosejs/studio/frontend/public/* ./public/imdb/
   `);
 });
