@@ -1,7 +1,8 @@
 {
   "name": "studio.mongoosejs.io",
   "dependencies": {
-    "@mongoosejs/studio": "0.0.82",
+    "@datastax/astra-mongoose": "^1.0.1",
+    "@mongoosejs/studio": "0.0.85",
     "tailwindcss": "3.x"
   },
   "devDependencies": {
