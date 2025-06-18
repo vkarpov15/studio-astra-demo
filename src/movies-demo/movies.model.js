@@ -47,9 +47,11 @@ const schema = new mongoose.Schema({
 });
 
 // Workaround for countDocuments() failing when result set has more than 1000 results
-schema.pre('countDocuments', async function() {
-  return mongoose.skipMiddlewareFunction(
-    await this.clone().find(this.getFilter()).select({ '*': 0 }).then(res => res.length)
+schema.pre('countDocuments', async function(next) {
+  return next(
+    mongoose.skipMiddlewareFunction(
+      await this.clone().find(this.getFilter()).select({ '*': 0 }).then(res => res.length)
+    )
   );
 });
 
