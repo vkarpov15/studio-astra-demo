@@ -46,12 +46,11 @@ const schema = new mongoose.Schema({
   num_mflix_comments: Number
 });
 
-schema.post('countDocuments', function (err, res, next) {
-  console.log('CountDocuments error', err);
-  if (err.message.includes('Too many documents to count')) {
-    return next(null, mongoose.overwriteMiddlewareResult('1000+'));
-  }
-  return next(err);
+// Workaround for countDocuments() failing when result set has more than 1000 results
+schema.pre('countDocuments', async function() {
+  return mongoose.skipMiddlewareFunction(
+    await this.find(this.getFilter()).select({ '*': 0 }).then(res => res.length)
+  );
 });
 
 module.exports = mongoose.model('Movie', schema, 'movies');
