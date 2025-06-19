@@ -43,7 +43,8 @@ const schema = new mongoose.Schema({
     rotten: Number,
     lastUpdated: Date
   },
-  num_mflix_comments: Number
+  num_mflix_comments: Number,
+  $vectorize: String
 });
 
 // Workaround for countDocuments() failing when result set has more than 1000 results
