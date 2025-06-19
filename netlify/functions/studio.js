@@ -15,9 +15,9 @@ const context = `
 This project is configured to communicate with DataStax Astra's Data API using the @datastax/astra-mongoose project, not MongoDB.
 Please be aware of the following additional rules and features of Data API.
 
-Data API does not support aggregations. Do not write any aggregate() calls in your scripts.
+Data API does not support aggregations. Do not write any aggregate() calls in your scripts. If the user asks you to write an aggregation, reply "Data API does not support aggregations."
 
-Data API supports vector search using the following syntax: UserModel.find().sort({ $vector: { $meta: 'some text' } }).limit(5) will return the 5 documents whose $vectorize property is closest to 'some text'. Data API computes embeddings automatically.
+Data API supports vector search using the following syntax: UserModel.find().sort({ $vectorize: { $meta: 'some text' } }).limit(5) will return the 5 documents whose $vectorize property is closest to 'some text'. Data API computes embeddings automatically.
 `.trim();
 
 const handler = require('@mongoosejs/studio/backend/netlify')(mongoose, {
