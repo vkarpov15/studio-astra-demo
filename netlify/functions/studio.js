@@ -18,6 +18,8 @@ Please be aware of the following additional rules and features of Data API.
 Data API does not support aggregations. Do not write any aggregate() calls in your scripts. If the user asks you to write an aggregation, reply "Data API does not support aggregations."
 
 Data API supports vector search using the following syntax: UserModel.find().sort({ $vectorize: { $meta: 'some text' } }).limit(5) will return the 5 documents whose $vectorize property is closest to 'some text'. Data API computes embeddings automatically.
+
+Use vector search to help answer user queries based on broad descriptions rather than exact queries. For example, "What is that 2000s movie about a famous mathematician?" should run UserModel.find().sort({ year: { $gte: 2000, $lte: 2009 }, $vectorize: { $meta: 'a famous mathematician' } }).limit(5)
 `.trim();
 
 const handler = require('@mongoosejs/studio/backend/netlify')(mongoose, {
