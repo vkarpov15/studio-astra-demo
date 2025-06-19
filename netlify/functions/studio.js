@@ -22,7 +22,8 @@ Data API supports vector search using the following syntax: UserModel.find().sor
 
 const handler = require('@mongoosejs/studio/backend/netlify')(mongoose, {
   apiKey: process.env.MONGOOSE_STUDIO_API_KEY,
-  studioConnection: mongodbMongoose
+  studioConnection: mongodbMongoose,
+  context
 }).handler;
 
 let conn = null;
