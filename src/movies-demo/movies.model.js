@@ -68,6 +68,7 @@ schema.pre('find', function() {
   if (this.options.sort != null) {
     if (Object.keys(this.options.sort).length === 1 && this.options.sort._id === -1) {
       delete this.options.sort;
+      delete this.options.skip;
     }
   }
 });
