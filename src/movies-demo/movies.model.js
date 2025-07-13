@@ -49,11 +49,27 @@ const schema = new mongoose.Schema({
 
 // Workaround for countDocuments() failing when result set has more than 1000 results
 schema.pre('countDocuments', async function(next) {
+  const filter = this.getFilter();
+  if (filter == null || Object.keys(filter).length === 0) {
+    return next(
+      mongoose.skipMiddlewareFunction(
+        await this.clone().estimatedDocumentCount()
+      )
+    );
+  }
   return next(
     mongoose.skipMiddlewareFunction(
       await this.clone().find(this.getFilter()).select({ '*': 0 }).then(res => res.length)
     )
   );
+});
+
+schema.pre('find', function() {
+  if (this.options.sort != null) {
+    if (Object.keys(this.options.sort).length === 1 && this.options.sort._id === -1) {
+      delete this.options.sort;
+    }
+  }
 });
 
 module.exports = mongoose.model('Movie', schema, 'movies');
